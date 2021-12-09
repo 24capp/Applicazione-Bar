@@ -1,0 +1,158 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+	
+	//Ciclo while iniziale e presentazione locale 
+		
+	System.out.println("Benvenuto nel Tritolo Bar! Come ti chiami?");	
+	
+	Scanner nome = new Scanner(System.in);
+	String nomeCliente = nome.nextLine();
+		
+	while(true) {
+	//Switch per il nome
+	switch (nomeCliente) {
+	case "Cappello":
+		System.out.println("Sei cappello, avrai uno sconto.");
+		break;
+	default:
+		System.out.println("Benvenuto " + nomeCliente);	
+		break;
+	}
+	
+	//Condizioni per controllo età
+	System.out.println("Quanti anni hai?");	
+	Scanner anni = new Scanner(System.in);
+	int anniCliente= anni.nextInt();
+	
+	
+	if(anniCliente<18) {
+		System.out.println("Mi dispiace, " + nomeCliente + " sei minorenne e non posso venderti alcolici");
+		System.exit(0);
+	}
+	
+	else if(anniCliente>=75) {
+	   System.out.println("Ti consiglio di bere poco! In ogni caso, cosa desideri " + nomeCliente + ("? Posso consigliarti il nostro migliore (nonchè unico) cocktail della casa") );	
+	   break;
+	}
+
+	else {
+	System.out.println("Perfetto " + nomeCliente + ("!") + " Posso consigliarti il nostro Gin Tonic!");
+	break;
+	}
+	}
+	
+	while(true) {
+	//Tasto per ordinare 
+	System.out.println("Se vuoi visualizzare la lista con i nostri cocktail premi 0, altrimenti premi un altro numero per chiudere");
+		
+	Scanner lista = new Scanner(System.in);	     		
+		int tasto = lista.nextInt();
+	     
+	if(tasto!=0) {
+		  	  System.out.println("Arrivederci");
+		  	  System.exit(0);
+		     }
+		   	   
+	     if(tasto==0) {
+	      System.out.println("Ecco a te la nostra lista di cocktail");
+	     }
+	      
+	     
+		//Switch con lista per scegliere il cocktail
+	    String [] bevande = {"Gin Tonic", "Vodka Lemon", "Mojito", "Cicchetto", "Amaro", "Birra"};	    	  
+	    float [] prezzo= {7,5,8,2,3, (float) 2.5};	    	           
+	  	   
+	    	System.out.println("Inserisci il codice per selezionare la bevanda");
+	    	System.out.println("1 - Gin Tonic [€7]");
+	    	System.out.println("2 - Vodka Lemon [€5]");
+	    	System.out.println("3 - Mojito [€8]");
+	    	System.out.println("4 - Cicchetto [€2]");
+	    	System.out.println("5 - Amaro [€3]");
+	    	System.out.println("6 - Birra [€2.5]");
+	    	
+	    	Scanner selezione = new Scanner(System.in);
+	    	int pulsanteSelezione = selezione.nextInt();
+	    	
+	    	switch (pulsanteSelezione) {
+	    	case 1: 
+	    		System.out.println("Hai scelto il Gin Tonic");
+	    		break;
+	    	case 2:
+	    		System.out.println("Hai scelto il Vodka Lemon");
+	    		break;
+	    	case 3:
+	    		System.out.println("Hai scelto il Mojito");
+	    		break;
+	    	case 4:
+	    		System.out.println("Hai scelto il Cicchetto");
+	    		break;
+	    	case 5:
+	    		System.out.println("Hai scelto l'Amaro");
+	    		break;
+	    	case 6:
+	    		System.out.println("Hai scelto la Birra");
+	    		break;
+	    	default:
+	    		System.out.println("Tasto errato");
+	    		break;
+	    	}
+	    	
+	    	
+	    	//Sconto per chi si chiama Cappello
+	    	switch (nomeCliente) {
+	    	case "Cappello":
+	    		prezzo[pulsanteSelezione-1] = (float) (prezzo[pulsanteSelezione-1] *(0.9));
+	    		System.out.println("Hai selezionato " + bevande[pulsanteSelezione-1]);	
+		    	System.out.println("Mi devi " + prezzo[pulsanteSelezione-1] + (" euro, con che banconota vorresti pagare?"));	
+	    		break;
+	    	default:
+	    		System.out.println("Hai selezionato " + bevande[pulsanteSelezione-1]);	
+		    	System.out.println("Mi devi " + prezzo[pulsanteSelezione-1] + (" euro, con che banconota vorresti pagare?"));	
+	    		break;
+	    	}
+	    
+	    	
+	    //Scanner per pagamento 
+	    Scanner pagamento = new Scanner(System.in);	     		
+		float banconota = pagamento.nextFloat();
+	
+		
+		//Calcolo del resto 
+	float resto = banconota - prezzo[pulsanteSelezione-1];
+		
+		if(banconota<prezzo[pulsanteSelezione-1]) {
+		System.out.println("Questi soldi non bastano");
+		break;
+		}
+		
+		if(banconota - prezzo[pulsanteSelezione-1]!=0) {
+	    System.out.println("Ti devo " + resto +  (" euro di resto"));
+		}
+		
+		if(banconota - prezzo[pulsanteSelezione-1]==0) {
+		System.out.println("Hai i soldi precisi, non ti devo del resto");
+		}
+		
+		
+		//Scanner e pulsante per ordinare di nuovo
+		System.out.println("Se vuoi ordinare di nuovo clicca 0, altrimenti premi un altro numero per chiudere.");
+		int risposta = lista.nextInt();
+		if (risposta != 0) {
+			System.out.println("Arrivederci");
+			}
+			nome.close();
+			lista.close();
+			selezione.close();
+			pagamento.close();
+			System.exit(0);
+		
+	   
+		
+	}
+		
+}
+}
